@@ -1,0 +1,19 @@
+{
+  "name": "hrr45-mvp",
+  "version": "1.0.0",
+  "description": "Exquisiter demo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-tiller/hrr45-mvp.git"
+  },
+  "author": "Adam Tiller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a-tiller/hrr45-mvp/issues"
+  },
+  "homepage": "https://github.com/a-tiller/hrr45-mvp#readme"
+}

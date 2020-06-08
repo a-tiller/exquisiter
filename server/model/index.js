@@ -32,5 +32,17 @@ function getRandomNode(cb) {
 // query adding a line:
 // MATCH (a:LINE) WHERE id(a)=0 WITH (a) CREATE (a)-[:THEN]->(b:LINE {text: "I did not want to get wet."}) RETURN b
 
+function makeNode(params, cb) {
+  const query = `MATCH (a:LINE) WHERE id(a)=${params.node} WITH (a) CREATE (a)-[:THEN]->(b:LINE {text: "${params.text}"}) RETURN b`;
+  session.run(query)
+    .then((result) => {
+      cb(null, result.records[0].get('b'));
+    })
+    .catch((error) => {
+      cb(error);
+    });
+}
+
 module.exports.getNode = getNode;
 module.exports.getRandomNode = getRandomNode;
+module.exports.makeNode = makeNode;

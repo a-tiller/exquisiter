@@ -7,7 +7,7 @@ if (result.error) {
   throw result.error;
 }
 
-const { getNode, getRandomNode } = require('./model');
+const { getNode, getRandomNode, makeNode } = require('./model');
 
 const app = express();
 
@@ -30,6 +30,16 @@ app.get('/api/random/', (req, res) => {
       res.status(500).send('Something went wrong!');
     } else {
       res.status(200).send(results);
+    }
+  });
+});
+
+app.post('/api/from/:node', (req, res) => {
+  makeNode({ node: req.params.node, text: req.body.text }, (err, results) => {
+    if (err) {
+      res.status(500).send('Something went wrong!');
+    } else {
+      res.status(201).send(results);
     }
   });
 });

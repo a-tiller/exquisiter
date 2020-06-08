@@ -29,6 +29,17 @@ function getRandomNode(cb) {
 // query creating a new root:
 // CREATE (a:LINE {text: "It was a dark and stormy night"}) RETURN a
 
+function makeRoot(params, cb) {
+  const query = `CREATE (a:LINE {text: "${params.text}"}) RETURN a`;
+  session.run(query)
+    .then((result) => {
+      cb(null, result.records[0].get('a'));
+    })
+    .catch((error) => {
+      cb(error);
+    });
+}
+
 function makeNode(params, cb) {
   const query = `MATCH (a:LINE) WHERE id(a)=${params.node} WITH (a) CREATE (a)-[:THEN]->(b:LINE {text: "${params.text}"}) RETURN b`;
   session.run(query)
@@ -75,44 +86,12 @@ function traverse(params, cb) {
       console.log(error);
       cb(error);
     });
-
-  // const query = `MATCH p = (r:LINE)-[*]->(n:LINE) WHERE id(r) = ${params.root} AND id(n) = ${params.node} RETURN p`;
-  // session.run(query)
-  //   .then((result) => {
-  //     const nodes = [];
-  //     const segments = result.records[0].get('p').segments
-  //     segments.forEach((segment) => {
-  //       nodes.push(segment.start);
-  //     });
-  //     nodes.push(segments[segments.length - 1].end);
-  //     return (nodes);
-  //   })
-  //   .then((nodes) => {
-  //     const lastId = nodes[nodes.length - 1].identity;
-  //     const innerQuery = `MATCH (start)-[r*]->(leaf) WHERE id(start) = ${lastId} AND not((leaf)-->()) RETURN DISTINCT leaf`;
-  //     session.run(innerQuery)
-  //       .then((result) => {
-  //         result.records);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //         cb(error);
-  //       });
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //     cb(error);
-  //   });
 }
 
 module.exports = {
   getNode,
   getRandomNode,
   makeNode,
+  makeRoot,
   traverse,
 };
-
-// .getNode = getNode;
-// module.exports.getRandomNode = getRandomNode;
-// module.exports.makeNode = makeNode;
-// module.exports.traverse = traverse;

@@ -11,6 +11,7 @@ const {
   getNode,
   getRandomNode,
   makeNode,
+  makeRoot,
   traverse,
 } = require('./model');
 
@@ -51,6 +52,16 @@ app.get('/api/:root/to/:node', (req, res) => {
 
 app.post('/api/from/:node', (req, res) => {
   makeNode({ node: req.params.node, text: req.body.text }, (err, results) => {
+    if (err) {
+      res.status(500).send('Something went wrong!');
+    } else {
+      res.status(201).send(results);
+    }
+  });
+});
+
+app.post('/api/root', (req, res) => {
+  makeRoot({ text: req.body.text }, (err, results) => {
     if (err) {
       res.status(500).send('Something went wrong!');
     } else {

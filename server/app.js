@@ -7,7 +7,12 @@ if (result.error) {
   throw result.error;
 }
 
-const { getNode, getRandomNode, makeNode } = require('./model');
+const {
+  getNode,
+  getRandomNode,
+  makeNode,
+  traverse,
+} = require('./model');
 
 const app = express();
 
@@ -26,6 +31,16 @@ app.get('/api/node/:node', (req, res) => {
 
 app.get('/api/random/', (req, res) => {
   getRandomNode((err, results) => {
+    if (err) {
+      res.status(500).send('Something went wrong!');
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});
+
+app.get('/api/:root/to/:node', (req, res) => {
+  traverse({ root: req.params.root, node: req.params.node }, (err, results) => {
     if (err) {
       res.status(500).send('Something went wrong!');
     } else {

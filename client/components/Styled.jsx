@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -39,6 +38,13 @@ const Button = styled.button`
   padding: .5em 1em;
 `;
 
+const EditBlock = styled.div`
+  grid-area: body;
+  font-family: "Barlow";
+  font-size: 18px;
+  padding: 20px 40px;
+`;
+
 const LineBreak = styled.hr`
   border: none;
   border-top: 1px solid;
@@ -66,6 +72,11 @@ const StoryBlock = styled.div`
   padding: 20px 40px;
 `;
 
+const StoryLine = styled.p`
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+`;
+
 const Title = styled.h3`
   grid-area: title;
   background-color: #989898;
@@ -83,9 +94,11 @@ export {
   GlobalStyle,
   Button,
   Container,
+  EditBlock,
   Line,
   LineBreak,
   Splash,
   StoryBlock,
+  StoryLine,
   Title,
 };

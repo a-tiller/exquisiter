@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import { EditBlock, Line } from './Styled';
+
 class Author extends React.Component {
   constructor(props) {
     super(props);
@@ -54,13 +56,15 @@ class Author extends React.Component {
     const { oldText, text } = this.state;
 
     return (
-      <form onSubmit={this.submitLine}>
-        <label>
-          {oldText}
-          <input type="text" value={text} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <EditBlock>
+        <form onSubmit={this.submitLine}>
+          <label htmlFor="lineField">
+            <Line>{oldText}</Line>
+            <input id="lineField" type="text" size="50" value={text} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </EditBlock>
     );
   }
 }

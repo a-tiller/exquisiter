@@ -1,4 +1,12 @@
 import React from 'react';
+import {
+  GlobalStyle,
+  Button,
+  Container,
+  LineBreak,
+  Splash,
+  Title,
+} from './components/Styled';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,14 +33,36 @@ class App extends React.Component {
   render() {
     const { visited } = this.state;
     return (
-      visited ? (
-        <div>Not Splash</div>
-      ) : (
-        <div>
-          Splash
-          <button onClick={this.toggleVisited}>Play</button>
-        </div>
-      )
+      <>
+        <GlobalStyle />
+        {visited ? (
+          <Container>
+            <Title>exquisiter</Title>
+            <div>
+              Body
+            </div>
+          </Container>
+        ) : (
+          <Container>
+            <Title>exquisiter</Title>
+            <Splash>
+              <p>
+                The &#39;exquisite corpse&#39; or round-robin story is a classic collaborative storytelling format where authors explore a narrative where no one is in complete control.
+              </p>
+              <LineBreak />
+              <p>
+                But while the past is fixed, imaginary futures are plenitudinous. There is so much more than one narrative to explore.
+              </p>
+              <LineBreak />
+              <p>
+                All it takes to participate in Exquisiter is to read a phrase or sentence another author wrote, and add one of your own.
+              </p>
+              <br />
+              <Button onClick={this.toggleVisited}>Play</Button>
+            </Splash>
+          </Container>
+        )}
+      </>
     );
   }
 }

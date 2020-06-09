@@ -1,7 +1,7 @@
 import React from 'react';
-import Popover from 'react-tiny-popover';
+import Popover, { ArrowContainer } from 'react-tiny-popover';
 
-import { Line } from './Styled';
+import { Button, PopoverBox, SLine } from './Styled';
 
 class StoryLine extends React.Component {
   constructor(props) {
@@ -22,12 +22,37 @@ class StoryLine extends React.Component {
   }
 
   render() {
-    const { line } = this.props;
+    const { popover } = this.state;
+    const { line, changeStory, changeEdit } = this.props;
 
     return (
-      <Line onClick={this.togglePopover}>
-        {line.properties.text}
-      </Line>
+      <Popover
+        isOpen={popover}
+        position="left"
+        padding={10}
+        onClickOutside={this.togglePopover}
+        content={({ position, targetRect, popoverRect }) => (
+          <ArrowContainer
+            position={position}
+            targetRect={targetRect}
+            popoverRect={popoverRect}
+            arrowColor="#d1e4cb"
+            arrowSize={50}
+            arrowStyle={{ opacity: 0.7 }}
+          >
+            <PopoverBox>
+              <Button onClick={() => { changeStory(line.identity); }}>Explore</Button>
+              <Button onClick={() => { changeEdit(line.identity); }}>Expand</Button>
+            </PopoverBox>
+          </ArrowContainer>
+        )}
+      >
+        {(ref) => (
+          <SLine ref={ref} onClick={this.togglePopover}>
+            {line.properties.text}
+          </SLine>
+        )}
+      </Popover>
     );
   }
 }

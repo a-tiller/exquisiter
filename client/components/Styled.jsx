@@ -58,6 +58,13 @@ const Line = styled.p`
   font-size: 16px;
 `;
 
+const PopoverBox = styled.div`
+  background-color: #d1e4cb;
+  border-radius: 3px;
+  opacity: 0.7;
+  padding: 5px 10px;
+`;
+
 const Splash = styled.div`
   grid-area: body;
   font-family: "Barlow";
@@ -72,9 +79,10 @@ const StoryBlock = styled.div`
   padding: 20px 40px;
 `;
 
-const StoryLine = styled.p`
-  font-family: "Courier New", Courier, monospace;
-  font-size: 16px;
+const SLine = styled(Line)`
+  :hover {
+    color: #d1e4cb;
+  }
 `;
 
 const Title = styled.h3`
@@ -97,8 +105,9 @@ export {
   EditBlock,
   Line,
   LineBreak,
+  PopoverBox,
   Splash,
   StoryBlock,
-  StoryLine,
+  SLine,
   Title,
 };

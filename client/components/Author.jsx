@@ -27,6 +27,14 @@ class Author extends React.Component {
             oldText: result.data.properties.text,
           });
         });
+    } else {
+      axios.get(`/api/node/${node}`)
+        .then((result) => {
+          this.setState({
+            node: result.data.identity,
+            oldText: result.data.properties.text,
+          });
+        });
     }
   }
 

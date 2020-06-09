@@ -1,4 +1,6 @@
 import React from 'react';
+import Author from './components/Author';
+import Explore from './components/Explore';
 import {
   GlobalStyle,
   Button,
@@ -8,19 +10,29 @@ import {
   Title,
 } from './components/Styled';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       story: [],
       root: 0,
-      eNode: 0,
+      eNode: null,
       sNode: 0,
       visited: false,
       amEditing: true,
     };
 
+    this.toggleEditing = this.toggleEditing.bind(this);
     this.toggleVisited = this.toggleVisited.bind(this);
+    this.changeStory = this.changeStory.bind(this);
+  }
+
+  toggleEditing() {
+    const { amEditing } = this.state;
+    this.setState({
+      amEditing: !amEditing,
+    });
   }
 
   toggleVisited() {
@@ -30,17 +42,25 @@ class App extends React.Component {
     });
   }
 
+  changeStory(node) {
+    this.setState({
+      sNode: node,
+    });
+  }
+
   render() {
-    const { visited } = this.state;
+    const { eNode, visited, amEditing } = this.state;
     return (
       <>
         <GlobalStyle />
         {visited ? (
           <Container>
             <Title>exquisiter</Title>
-            <div>
-              Body
-            </div>
+            {amEditing ? (
+              <Author node={eNode} editing={this.toggleEditing} story={this.changeStory} />
+            ) : (
+              <Explore />
+            )}
           </Container>
         ) : (
           <Container>

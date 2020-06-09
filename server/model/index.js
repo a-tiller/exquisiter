@@ -62,6 +62,9 @@ function traverse(params, cb) {
         leaves.push(record.get('leaf').identity);
       });
 
+      if (leaves.length === 0) {
+        return params.node;
+      }
       return leaves[Math.floor(Math.random() * leaves.length)];
     })
     .then((end) => {

@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import Author from './components/Author';
 import Explore from './components/Explore';
 import {
@@ -26,6 +28,22 @@ class App extends React.Component {
     this.toggleEditing = this.toggleEditing.bind(this);
     this.toggleVisited = this.toggleVisited.bind(this);
     this.changeStory = this.changeStory.bind(this);
+    this.changeEdit = this.changeEdit.bind(this);
+    this.getStory = this.getStory.bind(this);
+  }
+
+  getStory() {
+    const { root, sNode } = this.state;
+
+    axios.get(`/api/${root}/to/${sNode}/`)
+      .then((results) => {
+        this.setState({
+          story: results.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   toggleEditing() {
@@ -45,11 +63,24 @@ class App extends React.Component {
   changeStory(node) {
     this.setState({
       sNode: node,
+    }, this.getStory);
+  }
+
+  changeEdit(node) {
+    this.setState({
+      eNode: node,
+      amEditing: true,
     });
   }
 
   render() {
-    const { eNode, visited, amEditing } = this.state;
+    const {
+      story,
+      eNode,
+      visited,
+      amEditing,
+    } = this.state;
+
     return (
       <>
         <GlobalStyle />
@@ -57,9 +88,9 @@ class App extends React.Component {
           <Container>
             <Title>exquisiter</Title>
             {amEditing ? (
-              <Author node={eNode} editing={this.toggleEditing} story={this.changeStory} />
+              <Author node={eNode} editing={this.toggleEditing} changeStory={this.changeStory} />
             ) : (
-              <Explore />
+              <Explore story={story} changeStory={this.changeStory} changeEdit={this.changeEdit} />
             )}
           </Container>
         ) : (

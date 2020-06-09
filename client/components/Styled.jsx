@@ -47,10 +47,22 @@ const LineBreak = styled.hr`
   width: 60%;
 `;
 
+const Line = styled.p`
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+`;
+
 const Splash = styled.div`
   grid-area: body;
   font-family: "Barlow";
-  font-size: 16px;
+  font-size: 18px;
+  padding: 20px 40px;
+`;
+
+const StoryBlock = styled.div`
+  grid-area: body;
+  font-family: "Barlow";
+  font-size: 18px;
   padding: 20px 40px;
 `;
 
@@ -61,6 +73,7 @@ const Title = styled.h3`
   color: #f8f8f8;
   font-family: "Fredericka the Great";
   font-size: 50px;
+  font-weight: 400;
   height: 75px;
   line-height: 75px;
   text-align: center;
@@ -70,7 +83,9 @@ export {
   GlobalStyle,
   Button,
   Container,
+  Line,
   LineBreak,
   Splash,
+  StoryBlock,
   Title,
 };

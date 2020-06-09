@@ -30,13 +30,13 @@ class Author extends React.Component {
 
   submitLine(e) {
     const { node, text } = this.state;
-    const { editing, story } = this.props;
+    const { editing, changeStory } = this.props;
 
     e.preventDefault();
 
     axios.post(`/api/from/${node}`, { text })
       .then((response) => {
-        story(response.identity);
+        changeStory(response.data.identity);
       })
       .then(() => editing())
       .catch((error) => {

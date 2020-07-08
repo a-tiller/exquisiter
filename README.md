@@ -7,6 +7,7 @@
 
 1. [Requirements](#requirements)
 1. [Development](#development)
+1. [Demo](#demo)
 
 ## Requirements
 
@@ -58,3 +59,17 @@ npm start
 |  **GET**     |  /api/node/*node*                   |  Retrieves the line at *node*.                         |
 |  **GET**     |  /api/random                        |  Retrieves a random line.                              |
 |  **GET**     |  /api/*root*/to/*node*              |  Retrieves a traversal from *root* to *node*.          |
+
+## Demo
+
+### Web Interface:
+
+![gif of interface](https://i.imgur.com/AislM8g.gif)
+
+### Story Tree:
+
+![png of tree](https://i.imgur.com/BTDsgbe.png)
+
+### Story Tree Detail:
+
+![png of tree detail](https://i.imgur.com/K087Zyc.png)
